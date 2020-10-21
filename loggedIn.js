@@ -32,7 +32,7 @@ function newToDo() {
     todoList.push(printNew)
     localStorage.setItem("todoList", JSON.stringify(todoList))
     
-    removeItem()
+   
     printToDo()
 }
 /* Function for the container, creating a list and saving to localstorage */

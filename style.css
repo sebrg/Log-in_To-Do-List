@@ -35,10 +35,7 @@ body {
     background-color: lightgreen;
 }
 
-#signinUsername {
-    margin-bottom: 10px;  
-    
-}
+
 
 #loginButton {
     width: 9vw;
@@ -128,4 +125,24 @@ icon {
 
 icon:hover {
     color: red;
+}
+
+#registerButton {
+    width: 9vw;
+    height: 5vh; 
+    border: none;
+    border-radius: 5px;
+    margin: 10px;
+    font-family: cursive;
+    color: white;
+    background-color: rgba(0, 128, 0, 0.482);
+}
+
+#registerButton:hover {
+    background-color: green;
+    cursor: pointer;
+}
+
+#registerUsername {
+    margin-bottom: 5px;
 }
