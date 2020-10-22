@@ -18,19 +18,20 @@ function initSite() {
 
 function getUserList() {
     let userList = localStorage.getItem("userList")
+    /* creating a list if there is none */
     if(userList == null) {
-        userList = []
+         userList = []
 }   else  {
     userList = JSON.parse(userList)
 }
     return userList
 }
-
+/* Save array to localstorage */
 function saveUserList(saveUserList) {
     localStorage.getItem("userList",JSON.stringify(saveUserList))
 }
 
-
+/* function for regging users, pushes a new "person" to the userList in localstorage. */
 function regUser() {
     let regUsername = document.getElementById("registerUsername").value
     let regPassword = document.getElementById("registerPassword").value
@@ -45,7 +46,7 @@ function regUser() {
     saveUserList(newUser)
     
 }
-
+/* Checking if the username & password exist, returning true or false */
 function checkUser(nameToCheck, passwordtoCheck) { 
     let myList = getUserList() 
     
@@ -58,6 +59,7 @@ function checkUser(nameToCheck, passwordtoCheck) {
     return myListName
 }
 
+/* Login-function, fetches value from login-inputs, calling checkUser, if a match = successLogin */
 function login() {
     let userName = document.getElementById("signinUsername").value
     let userPass = document.getElementById("signinPassword").value
