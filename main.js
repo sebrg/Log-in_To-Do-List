@@ -1,6 +1,6 @@
 window.addEventListener("load", initSite)
 document.getElementById('loginButton').addEventListener("click", login)
-document.getElementById("registerButton").addEventListener("click", registerUser)
+document.getElementById("registerButton").addEventListener("click", regUser)
 
 /* page is loaded, if login = success, gets redirected to loginpage */
 function initSite() {
@@ -16,51 +16,59 @@ function initSite() {
 }
 
 
-let users = [{
-    username: "test",
-    password: "test"
-}]
-
-function login() {
-   /* Gets the value from the inputs */ 
-    const usernameToCheck = document.getElementById("signinUsername").value
-    const passwordToCheck = document.getElementById("signinPassword").value
-    
-    /* saves the array/for-loop in localstorage */ 
-    localStorage.setItem("userList", JSON.stringify(users))
-
-    /* Loop is checking if username/password from array matches */ 
-    for (let i = 0; i < users.length; i++) {
-        if(usernameToCheck == users[i].username && passwordToCheck == users [i].password){
-            sessionStorage.setItem("successLogin", usernameToCheck)
-            window.location = "mypage.html"
-            return
-        }
-        else {
-            alert("Fel lösenord eller användarnamn")
-        } 
-    }   
-    
+function getUserList() {
+    let userList = localStorage.getItem("userList")
+    if(userList == null) {
+        userList = []
+}   else  {
+    userList = JSON.parse(userList)
+}
+    return userList
 }
 
-/* register a new user & push the new user to the array */ 
-function registerUser() {
+function saveUserList(saveUserList) {
+    localStorage.getItem("userList",JSON.stringify(saveUserList))
+}
+
+
+function regUser() {
     let regUsername = document.getElementById("registerUsername").value
     let regPassword = document.getElementById("registerPassword").value
-    
-    let newUser = {
-            username: regUsername,
-            password: regPassword
-    }
-         for (let i = 0; i < users.length; i++) {
-        localStorage.getItem("userList")
-             if(regUsername == users[i].username) {
-                alert("That username is already taken")
-                return    
-             }
-         } 
 
-        users.push(newUser)
-        localStorage.setItem("userList", JSON.stringify(users))
-        
+    let newUser = getUserList()
+    let newAcc = {
+        name: regUsername,
+        password: regPassword
+    }
+    newUser.push(newAcc)
+    localStorage.setItem("userList", JSON.stringify(newUser))
+    saveUserList(newUser)
+    
 }
+
+function checkUser(nameToCheck, passwordtoCheck) { 
+    let myList = getUserList() 
+    
+    myListName = false
+    for(i = 0; i < myList.length; i++){
+        if(nameToCheck == myList[i].name && passwordtoCheck == myList[i].password) {
+            myListName = true
+        }
+    }
+    return myListName
+}
+
+function login() {
+    let userName = document.getElementById("signinUsername").value
+    let userPass = document.getElementById("signinPassword").value
+    checkUser(userName, userPass)
+      if (myListName == true) {
+         sessionStorage.setItem("successLogin", userName) 
+        window.location = "mypage.html"
+        
+      } else {
+        alert('Invalid login!');
+       
+      }
+    }
+  
