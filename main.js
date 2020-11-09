@@ -16,6 +16,7 @@ function initSite() {
 }
 
 
+
 function getUserList() {
     let userList = localStorage.getItem("userList")
     /* creating a list if there is none */
@@ -35,16 +36,19 @@ function saveUserList(saveUserList) {
 function regUser() {
     let regUsername = document.getElementById("registerUsername").value
     let regPassword = document.getElementById("registerPassword").value
-
+    
+    let todos = []
+   
     let newUser = getUserList()
     let newAcc = {
         name: regUsername,
-        password: regPassword
+        password: regPassword,
+        todos: todos
     }
     newUser.push(newAcc)
     localStorage.setItem("userList", JSON.stringify(newUser))
     saveUserList(newUser)
-    
+ 
 }
 /* Checking if the username & password exist, returning true or false */
 function checkUser(nameToCheck, passwordtoCheck) { 
@@ -66,6 +70,7 @@ function login() {
     checkUser(userName, userPass)
       if (myListName == true) {
          sessionStorage.setItem("successLogin", userName) 
+         localStorage.setItem("successLogin", userName) 
         window.location = "mypage.html"
         
       } else {
